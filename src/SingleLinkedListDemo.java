@@ -13,10 +13,11 @@ public class SingleLinkedListDemo {
 		SingleLinkedList singleLinkedList = new SingleLinkedList();
 
 		// 加入
-		singleLinkedList.add(hero1);
-		singleLinkedList.add(hero4);
-		singleLinkedList.add(hero2);
-		singleLinkedList.add(hero3);
+		singleLinkedList.addByOrder(hero1);
+		singleLinkedList.addByOrder(hero4);
+		singleLinkedList.addByOrder(hero2);
+		singleLinkedList.addByOrder(hero3);
+		singleLinkedList.addByOrder(hero3);
 
 		// 测试一下单链表的反转功能
 		System.out.println("原来链表的情况~~");
@@ -55,6 +56,29 @@ class SingleLinkedList {
 		}
 
 	}
+
+	public void addByOrder(HeroNode heroNode) {
+		HeroNode temp = head;
+		boolean flag = false;
+		while (true) {
+			if (temp.next == null) {
+				break;
+			}
+			if (temp.next.no > heroNode.no) {
+				break;
+			} else if (temp.next.no == heroNode.no) {
+				flag = true;
+				break;
+			}
+			temp = temp.next;
+		}
+		if (flag) {
+			System.out.printf("target no %d already exists\n", heroNode.no);
+		} else {
+			heroNode.next = temp.next;
+			temp.next = heroNode;
+		}
+	}
 }
 
 class HeroNode {
@@ -71,7 +95,7 @@ class HeroNode {
 
 	@Override
 	public String toString() {
-		return "HeroNode [no=" + no + ", name=" + name + ", nickname=" + nickname  + "]";
+		return "HeroNode [no=" + no + ", name=" + name + ", nickname=" + nickname + "]";
 	}
 
 }
