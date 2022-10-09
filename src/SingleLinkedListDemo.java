@@ -17,12 +17,13 @@ public class SingleLinkedListDemo {
 		singleLinkedList.addByOrder(hero4);
 		singleLinkedList.addByOrder(hero2);
 		singleLinkedList.addByOrder(hero3);
-		singleLinkedList.addByOrder(hero3);
-
-		// 测试一下单链表的反转功能
 		System.out.println("原来链表的情况~~");
 		singleLinkedList.list();
-
+		System.out.println("~~~~~~~~~~~~~~");
+		HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟");
+		singleLinkedList.update(newHeroNode);
+		// 测试一下单链表的反转功能
+		singleLinkedList.list();
 	}
 
 }
@@ -77,6 +78,31 @@ class SingleLinkedList {
 		} else {
 			heroNode.next = temp.next;
 			temp.next = heroNode;
+		}
+	}
+
+	public void update(HeroNode newHeroNode) {
+		if (head.next == null) {
+			System.out.println("list is empty");
+			return;
+		}
+		HeroNode temp = head.next;
+		boolean flag = false;
+		while (true) {
+			if (temp == null) {
+				break;
+			}
+			if (temp.no == newHeroNode.no) {
+				flag = true;
+				break;
+			}
+			temp = temp.next;
+		}
+		if (flag) {
+			temp.name = newHeroNode.name;
+			temp.nickname = newHeroNode.nickname;
+		} else {
+			System.out.printf("No.%d not found\n",newHeroNode.no);
 		}
 	}
 }
