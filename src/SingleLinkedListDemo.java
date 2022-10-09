@@ -1,4 +1,3 @@
-
 public class SingleLinkedListDemo {
 
 	public static void main(String[] args) {
@@ -102,7 +101,27 @@ class SingleLinkedList {
 			temp.name = newHeroNode.name;
 			temp.nickname = newHeroNode.nickname;
 		} else {
-			System.out.printf("No.%d not found\n",newHeroNode.no);
+			System.out.printf("No.%d not found\n", newHeroNode.no);
+		}
+	}
+
+	public void del(int no) {
+		HeroNode temp = head;
+		boolean flag = false; 
+		while(true) {
+			if(temp.next == null) { 
+				break;
+			}
+			if(temp.next.no == no) {
+				flag = true;
+				break;
+			}
+			temp = temp.next; 
+		}
+		if(flag) { 
+			temp.next = temp.next.next;
+		}else {
+			System.out.printf("The No.%d node doesn't exists\n", no);
 		}
 	}
 }
