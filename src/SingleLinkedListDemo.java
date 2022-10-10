@@ -1,17 +1,13 @@
 public class SingleLinkedListDemo {
 
 	public static void main(String[] args) {
-		// 进行测试
-		// 先创建节点
 		HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
 		HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
 		HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
 		HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
 
-		// 创建要给链表
 		SingleLinkedList singleLinkedList = new SingleLinkedList();
 
-		// 加入
 		singleLinkedList.addByOrder(hero1);
 		singleLinkedList.addByOrder(hero4);
 		singleLinkedList.addByOrder(hero2);
@@ -21,10 +17,21 @@ public class SingleLinkedListDemo {
 		System.out.println("~~~~~~~~~~~~~~");
 		HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟");
 		singleLinkedList.update(newHeroNode);
-		// 测试一下单链表的反转功能
 		singleLinkedList.list();
 	}
 
+	public static int getLength(HeroNode head) {
+		if (head.next == null) {
+			return 0;
+		}
+		int length = 0;
+		HeroNode cur = head.next;
+		while (cur != null) {
+			length++;
+			cur = cur.next;
+		}
+		return length;
+	}
 }
 
 class SingleLinkedList {
@@ -107,20 +114,20 @@ class SingleLinkedList {
 
 	public void del(int no) {
 		HeroNode temp = head;
-		boolean flag = false; 
-		while(true) {
-			if(temp.next == null) { 
+		boolean flag = false;
+		while (true) {
+			if (temp.next == null) {
 				break;
 			}
-			if(temp.next.no == no) {
+			if (temp.next.no == no) {
 				flag = true;
 				break;
 			}
-			temp = temp.next; 
+			temp = temp.next;
 		}
-		if(flag) { 
+		if (flag) {
 			temp.next = temp.next.next;
-		}else {
+		} else {
 			System.out.printf("The No.%d node doesn't exists\n", no);
 		}
 	}
