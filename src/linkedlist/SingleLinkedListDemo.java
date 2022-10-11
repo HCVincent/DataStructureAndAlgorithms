@@ -2,7 +2,6 @@ package linkedlist;
 
 import java.util.Stack;
 
-
 public class SingleLinkedListDemo {
 
 	public static void main(String[] args) {
@@ -10,13 +9,27 @@ public class SingleLinkedListDemo {
 		HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
 		HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
 		HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
+		HeroNode hero5 = new HeroNode(5, "宋", "及时");
+		HeroNode hero6 = new HeroNode(6, "卢俊", "玉麒");
+		HeroNode hero7 = new HeroNode(7, "吴", "智多");
+		HeroNode hero8 = new HeroNode(8, "林", "豹子");
 
 		SingleLinkedList singleLinkedList = new SingleLinkedList();
 
 		singleLinkedList.addByOrder(hero1);
-		singleLinkedList.addByOrder(hero4);
+		singleLinkedList.addByOrder(hero5);
 		singleLinkedList.addByOrder(hero2);
 		singleLinkedList.addByOrder(hero3);
+
+		SingleLinkedList singleLinkedList2 = new SingleLinkedList();
+
+		singleLinkedList2.addByOrder(hero6);
+		singleLinkedList2.addByOrder(hero4);
+		singleLinkedList2.addByOrder(hero8);
+		singleLinkedList2.addByOrder(hero7);
+		System.out.println("merge!!!!!!!!~~~~~~~~~");
+		mergeLists(singleLinkedList, singleLinkedList2).list();
+		System.out.println("merge done~~~~~~~~~~~~");
 //		System.out.println("原来链表的情况~~");
 //		singleLinkedList.list();
 //		System.out.println("~~~~~~~~~~~~~~");
@@ -28,8 +41,32 @@ public class SingleLinkedListDemo {
 //		System.out.println(getLength(singleLinkedList.getHead()));
 //		HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 1);
 //		System.out.println("res=" + res);
-		reversePrint(singleLinkedList.getHead());
-		singleLinkedList.list();
+//		reversePrint(singleLinkedList.getHead());
+//		singleLinkedList.list();
+	}
+
+	public static SingleLinkedList mergeLists(SingleLinkedList l1, SingleLinkedList l2) {
+		HeroNode n1 = l1.getHead().next;
+		HeroNode n2 = l2.getHead().next;
+		SingleLinkedList r = new SingleLinkedList();
+		HeroNode result = r.getHead();
+		while (n1 != null && n2 != null) {
+			if (n1.no >= n2.no) {
+				result.next = n2;
+				n2 = n2.next;
+			} else {
+				result.next = n1;
+				n1 = n1.next;
+			}
+			result = result.next;
+		}
+		if (n1 == null) {
+			result.next = n2;
+		}
+		if (n2.next == null) {
+			result = n1;
+		}
+		return r;
 	}
 
 	public void reverse(HeroNode head) {
