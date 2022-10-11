@@ -1,3 +1,4 @@
+package linkedlist;
 public class SingleLinkedListDemo {
 
 	public static void main(String[] args) {
@@ -17,7 +18,44 @@ public class SingleLinkedListDemo {
 		System.out.println("~~~~~~~~~~~~~~");
 		HeroNode newHeroNode = new HeroNode(2, "Ð¡Â¬", "Óñ÷è÷ë");
 		singleLinkedList.update(newHeroNode);
+		singleLinkedList.del(1);
+		singleLinkedList.del(4);
 		singleLinkedList.list();
+		System.out.println(getLength(singleLinkedList.getHead()));
+		HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 1);
+		System.out.println("res=" + res);
+	}
+
+	public void reverse(HeroNode head) {
+		if (head.next == null || head.next.next == null) {
+			return;
+		}
+
+		HeroNode cur = head.next;
+		HeroNode next = null;
+		HeroNode reverseHead = new HeroNode(0, "", "");
+		while (cur != null) {
+			next = cur.next;
+			cur.next = reverseHead.next;
+			reverseHead.next = cur;
+			cur = next;
+		}
+		head.next = reverseHead.next;
+	}
+
+	public static HeroNode findLastIndexNode(HeroNode head, int index) {
+		if (head.next == null) {
+			return null;
+		}
+		int size = getLength(head);
+		if (index <= 0 || index > size) {
+			return null;
+		}
+		HeroNode cur = head.next;
+		for (int i = 0; i < size - index; i++) {
+			cur = cur.next;
+		}
+		return cur;
 	}
 
 	public static int getLength(HeroNode head) {
@@ -36,6 +74,10 @@ public class SingleLinkedListDemo {
 
 class SingleLinkedList {
 	private HeroNode head = new HeroNode(0, "", "");
+
+	public HeroNode getHead() {
+		return head;
+	}
 
 	public void add(HeroNode heroNode) {
 		HeroNode temp = head;
