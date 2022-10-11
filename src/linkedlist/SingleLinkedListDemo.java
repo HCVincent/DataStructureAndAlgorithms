@@ -1,4 +1,8 @@
 package linkedlist;
+
+import java.util.Stack;
+
+
 public class SingleLinkedListDemo {
 
 	public static void main(String[] args) {
@@ -13,17 +17,19 @@ public class SingleLinkedListDemo {
 		singleLinkedList.addByOrder(hero4);
 		singleLinkedList.addByOrder(hero2);
 		singleLinkedList.addByOrder(hero3);
-		System.out.println("原来链表的情况~~");
+//		System.out.println("原来链表的情况~~");
+//		singleLinkedList.list();
+//		System.out.println("~~~~~~~~~~~~~~");
+//		HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟");
+//		singleLinkedList.update(newHeroNode);
+//		singleLinkedList.del(1);
+//		singleLinkedList.del(4);
+//		singleLinkedList.list();
+//		System.out.println(getLength(singleLinkedList.getHead()));
+//		HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 1);
+//		System.out.println("res=" + res);
+		reversePrint(singleLinkedList.getHead());
 		singleLinkedList.list();
-		System.out.println("~~~~~~~~~~~~~~");
-		HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟");
-		singleLinkedList.update(newHeroNode);
-		singleLinkedList.del(1);
-		singleLinkedList.del(4);
-		singleLinkedList.list();
-		System.out.println(getLength(singleLinkedList.getHead()));
-		HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 1);
-		System.out.println("res=" + res);
 	}
 
 	public void reverse(HeroNode head) {
@@ -41,6 +47,21 @@ public class SingleLinkedListDemo {
 			cur = next;
 		}
 		head.next = reverseHead.next;
+	}
+
+	public static void reversePrint(HeroNode head) {
+		if (head.next == null) {
+			return;
+		}
+		Stack<HeroNode> stack = new Stack<HeroNode>();
+		HeroNode cur = head.next;
+		while (cur != null) {
+			stack.push(cur);
+			cur = cur.next;
+		}
+		while (stack.size() > 0) {
+			System.out.println(stack.pop());
+		}
 	}
 
 	public static HeroNode findLastIndexNode(HeroNode head, int index) {
